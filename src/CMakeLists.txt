@@ -45,4 +45,6 @@ SET(TARGET_ADDED_LIBRARIES osgAnimation)
 
 #### end var setup  ###
 SETUP_PLUGIN(fbx)
+target_link_libraries(${TARGET_TARGETNAME} "-Wl,--no-as-needed" ${XML_LIBRARIES})
 set_target_properties(${TARGET_TARGETNAME} PROPERTIES PREFIX "")
+

@@ -4,6 +4,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 
 include(FindPkgConfig)
 pkg_check_modules(OSG REQUIRED openscenegraph-osg)
+pkg_check_modules(XML REQUIRED libxml-2.0)
 include(OsgMacroUtils)
 find_package(FBX REQUIRED)
 
