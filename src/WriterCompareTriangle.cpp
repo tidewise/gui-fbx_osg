@@ -1,10 +1,9 @@
 #include "WriterCompareTriangle.h"
 
-WriterCompareTriangle::WriterCompareTriangle(const osg::Geode& geode,
-                                             unsigned int      nbVertices)
-                                             :    geode(geode)
+WriterCompareTriangle::WriterCompareTriangle(const osg::Geode& in_geode, unsigned int in_nbVertices):
+        geode(geode)
 {
-    cutscene(nbVertices, geode.getDrawable(0)->asGeometry()->getBound());
+    cutscene(in_nbVertices, geode.getDrawable(0)->asGeometry()->getBoundingBox());
 }
 
 bool
@@ -20,8 +19,8 @@ WriterCompareTriangle::operator()(const std::pair<Triangle, int>& t1,
 
     if (t1.second != t2.second)
     {
-        const osg::Geometry* g = geode.getDrawable( t2.second )->asGeometry();
-        vecs = static_cast<const osg::Vec3Array*>(g->getVertexArray());
+        const osg::Geometry* g2 = geode.getDrawable( t2.second )->asGeometry();
+        vecs = static_cast<const osg::Vec3Array*>(g2->getVertexArray());
     }
     const osg::Vec3::value_type x2 = (*vecs)[t2.first.t1].x();
     const osg::Vec3::value_type y2 = (*vecs)[t2.first.t1].y();
