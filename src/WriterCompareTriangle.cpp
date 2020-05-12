@@ -1,9 +1,19 @@
 #include "WriterCompareTriangle.h"
 
+static osg::BoundingBox toBoundingBox(osg::BoundingSphere const& sphere) {
+    osg::BoundingBox box;
+    box.expandBy(sphere);
+    return box;
+}
+
+static osg::BoundingBox toBoundingBox(osg::BoundingBox const& box) {
+    return box;
+}
+
 WriterCompareTriangle::WriterCompareTriangle(const osg::Geode& in_geode, unsigned int in_nbVertices):
         geode(geode)
 {
-    cutscene(in_nbVertices, geode.getDrawable(0)->asGeometry()->getBound());
+    cutscene(in_nbVertices, toBoundingBox(geode.getDrawable(0)->asGeometry()->getBound()));
 }
 
 bool
